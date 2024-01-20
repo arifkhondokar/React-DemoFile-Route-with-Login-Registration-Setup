@@ -23,7 +23,7 @@ const emailregex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))
 let [showPassword, setShowPassword] = useState(false);
 
 // ------------validation------
-let [password, setPassword] = useState();
+let [password, setPassword] = useState("");
 
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,20}$/
 
@@ -42,6 +42,8 @@ let [loginError, setLoginError] = useState("")
       } else {
         setLoginError({ email: "", password: "" });
         console.log({email, password});
+        setEmail("")
+        setPassword("")
       }
     };
 
@@ -50,19 +52,20 @@ let [loginError, setLoginError] = useState("")
 let [openModal, setOpenModal] = useState(false);
 
 // -------forgot email validation------------------------
-let [forgotData, setForgotData] = useState("")
+let [forgotEmail, setForgotEmail] = useState("")
 
 // --------------------error messages-------------------
 let [error, setError] = useState("")
 
   let handlerForgotSubmit =() => {
-    if(!forgotData){
+    if(!forgotEmail){
       setError({email: "Enter your email address"}); 
-    }else if(!forgotData.match(emailregex)){
+    }else if(!forgotEmail.match(emailregex)){
       setError({email: "please enter a valid email address"});
     }else{
       setError({email: ""})
-      console.log(forgotData);
+      console.log(forgotEmail);
+      setForgotEmail("")
     }
   }
 
@@ -86,6 +89,7 @@ let [error, setError] = useState("")
                         onChange={(e) => setEmail(e.target.value)} 
                         style="inputStyle" 
                         variant="standard" 
+                        value={email}
                         labeltext="Email Address" 
                         type="email" name="email" 
                         />
@@ -99,6 +103,7 @@ let [error, setError] = useState("")
                         type={showPassword ? 'text' : 'password'}
                         onChange={ (e) => setPassword(e.target.value)} 
                         style="inputStyle" 
+                        value={password}
                         variant="standard" 
                         labeltext="Password" 
                         name="password" 
@@ -153,9 +158,10 @@ let [error, setError] = useState("")
           <div>
             <div>
               <MuiInput 
-              onChange={(e) => setForgotData(e.target.value)} 
+              onChange={(e) => setForgotEmail(e.target.value)} 
               style="inputStyle" 
               variant="standard" 
+              value={forgotEmail}
               labeltext="Email Address"  
               type="email" name="email" 
               />

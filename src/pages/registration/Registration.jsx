@@ -22,7 +22,7 @@ const emailregex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))
 let [showPassword, setShowPassword] = useState(false);
 
 // ------------validation------
-let [password, setPassword] = useState();
+let [password, setPassword] = useState("");
 
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,20}$/
 
@@ -43,7 +43,11 @@ let [regError, setRegError] = useState("")
       } else {
         setRegError({fulName: "", email: "", password: "" });
         console.log({fulName, email, password});
+        setFulName("")
+        setEmail("")
+        setPassword("")
       }
+      
     };
 
 
@@ -60,6 +64,7 @@ let [regError, setRegError] = useState("")
                     <div>
                       <MuiInput onChange={(e)=> setFulName(e.target.value)} 
                       style="inputStyle" 
+                      value={fulName}
                       variant="outlined" 
                       labeltext="Ful Name"  
                       type="text" name="ful name" 
@@ -73,6 +78,7 @@ let [regError, setRegError] = useState("")
                     <div>
                       <MuiInput onChange={(e) => setEmail(e.target.value)} 
                       style="inputStyle" 
+                      value={email}
                       variant="outlined" 
                       labeltext="Email Address"  
                       type="email" name="email" 
